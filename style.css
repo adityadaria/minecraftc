@@ -1,0 +1,114 @@
+/* Basic body and canvas styling */
+body {
+  margin: 0;
+  overflow: hidden; /* Prevent scrollbars */
+  background-color: #000; /* Base background */
+}
+
+canvas {
+  display: block; /* Remove extra space below canvas */
+  position: relative; /* Needed for z-index stacking */
+  z-index: 2; /* Canvas above stars */
+}
+
+/* Blocker overlay for initial instructions/pause state */
+#blocker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5); /* Semi-transparent black */
+  display: flex; /* Center content */
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 20; /* Highest layer */
+}
+
+/* Instructions box styling */
+#instructions {
+  width: 50%;
+  max-width: 450px; /* Prevent it getting too wide */
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-family: sans-serif;
+  cursor: pointer; /* Indicate it's clickable */
+  border: 2px solid #555;
+  line-height: 1.6; /* Better spacing for controls list */
+}
+
+/* Error state for the instructions box */
+#blocker.error #instructions {
+  background-color: #fee; /* Light red background */
+  color: #a00; /* Dark red text */
+  cursor: default; /* Not clickable in error state */
+  border-color: #a00;
+}
+
+/* Crosshair styling */
+#crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 50%; /* Make it a circle */
+  transform: translate(-50%, -50%); /* Center precisely */
+  pointer-events: none; /* Don't interfere with mouse clicks */
+  display: none; /* Hidden until pointer lock */
+  mix-blend-mode: difference; /* Make it visible on different backgrounds */
+  z-index: 15; /* Above game, below blocker */
+}
+
+/* Top-left info display */
+#info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-family: monospace;
+  background-color: rgba(0,0,0,0.5);
+  padding: 5px 8px;
+  border-radius: 3px;
+  pointer-events: none; /* Don't block clicks */
+  font-size: 12px;
+  z-index: 10; /* Above game elements */
+}
+
+/* Bottom-left block info display */
+#blockInfo {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-family: monospace;
+  background-color: rgba(0,0,0,0.5);
+  padding: 5px 8px;
+  border-radius: 3px;
+  pointer-events: none;
+  font-size: 14px;
+  z-index: 10;
+}
+
+/* Starfield background */
+#stars {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background: transparent;
+ pointer-events: none; /* Allow clicks through */
+ opacity: 0; /* Start hidden, fade in at night */
+ transition: opacity 2s ease-in-out; /* Smooth fade */
+ z-index: 1; /* Behind the canvas */
+}
+
+/* Individual star styling (applied via JS) */
+/* #stars div { ... } defined in JS createStars function */
